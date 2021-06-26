@@ -66,7 +66,8 @@ describe('addRowToPerson', () => {
     const person = {
       name: 'Whatever',
       count: 0,
-      emojiCounts: {}
+      emojiCounts: {},
+      tgifs: []
     }
 
     const row = {
@@ -88,7 +89,8 @@ describe('addRowToPerson', () => {
         ':tea:': 1,
         ':what:': 1,
         ':madetech:': 1,
-      }
+      },
+      tgifs: []
     }
 
     const row = {
@@ -105,6 +107,30 @@ describe('addRowToPerson', () => {
       ':what:': 2,
       ':madetech:': 2,
     });
+  });
+
+  it('should add to the list of tgifs', () => {
+
+    const person = {
+      name: 'Whatever',
+      count: 0,
+      emojiCounts: {},
+      tgifs: [
+        'some fake tgif'
+      ]
+    }
+
+    const row = {
+      "date": "2021-01-15",
+      "person1": "Freya",
+      "person2": "",
+      "tgif": ":heavy_division_sign: :two: :tea:m’s :what:+:madetech: :two:"
+    }
+    expect(addRowToPerson(person, row).tgifs).toEqual([
+      'some fake tgif',
+      ':heavy_division_sign: :two: :tea:m’s :what:+:madetech: :two:'
+    ]);
+
   });
 });
 
@@ -125,7 +151,10 @@ describe('getTgifLeagueTable', () => {
         "count": 1,
         "emojiCounts": {
           ":boom:": 1
-        }
+        },
+        "tgifs": [
+          "First sprint done :boom:"
+        ]
       }
     ]);
   });
@@ -142,7 +171,7 @@ describe('getTgifLeagueTable', () => {
         "date": "2021-01-29",
         "person1": "Laurie",
         "person2": "",
-        "tgif": "First sprint done :boom:"
+        "tgif": "Second sprint done :boom:"
       }
     ];
 
@@ -152,7 +181,11 @@ describe('getTgifLeagueTable', () => {
         "count": 2,
         "emojiCounts": {
           ":boom:": 2
-        }
+        },
+        "tgifs": [
+          "First sprint done :boom:",
+          "Second sprint done :boom:"
+        ]
       }
     ]);
   });
@@ -180,28 +213,32 @@ describe('leagueTableToString', () => {
         "emojiCounts": {
           ":boom:": 2,
           ":what:": 3,
-        }
+        },
+        "tgifs": []
       },
       {
         "name": "Freya",
         "count": 3,
         "emojiCounts": {
           ":boom:": 2
-        }
+        },
+        "tgifs": []
       },
       {
         "name": "Scott",
         "count": 2,
         "emojiCounts": {
           ":boom:": 1
-        }
+        },
+        "tgifs": []
       },
       {
         "name": "Bill",
         "count": 1,
         "emojiCounts": {
           ":boom:": 2
-        }
+        },
+        "tgifs": []
       }
     ];
     expect(leagueTableToString(leagueTable)).toEqual(

@@ -1,6 +1,7 @@
 const BASE_PERSON = {
     count: 0,
-    emojiCounts: {}
+    emojiCounts: {},
+    tgifs: []
  };
 
 const addNumberMaps = (a, b) => {
@@ -32,7 +33,8 @@ const addNumberMaps = (a, b) => {
     return {
       ...person,
       count: person.count + 1,
-      emojiCounts: addNumberMaps(person.emojiCounts, countEmojis(row.tgif))
+      emojiCounts: addNumberMaps(person.emojiCounts, countEmojis(row.tgif)),
+      tgifs: [...person.tgifs, row.tgif]
     };
  };
 
