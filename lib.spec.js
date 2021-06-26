@@ -1,4 +1,4 @@
-const { countEmojis, addRowToPerson, addNumberMaps, getTgifLeagueTable, leagueTableToString, getFavouriteEmoji } = require('./lib');
+const { countEmojis, addRowToPerson, addNumberMaps, getTgifLeagueTable, leagueTableToString, getFavouriteEmoji, addRanks } = require('./lib');
 
 describe('addNumberMaps', () => {
   it('should add two object with the same single property', () => {
@@ -134,6 +134,25 @@ describe('addRowToPerson', () => {
   });
 });
 
+describe('addRanks', () => {
+  it('should add the ranks', () => {
+    const table = [
+      {thing: 'a', count: 1},
+      {thing: 'b', count: 5},
+      {thing: 'c', count: 2},
+      {thing: 'd', count: 2},
+    ];
+
+    expect(addRanks(table)).toEqual([
+      {thing: 'b', count: 5, rank: 1},
+      {thing: 'c', count: 2, rank: 2},
+      {thing: 'd', count: 2, rank: 2},
+      {thing: 'a', count: 1, rank: 3},
+    ]);
+
+  })
+});
+
 describe('getTgifLeagueTable', () => {
   it('should get the table', () => {
     const data = [
@@ -141,7 +160,7 @@ describe('getTgifLeagueTable', () => {
         "date": "2021-01-29",
         "person1": "Laurie",
         "person2": "",
-        "tgif": "First sprint done :boom:"
+        "tgif": "First sprint done :boom:",
       }
     ];
 
@@ -154,7 +173,8 @@ describe('getTgifLeagueTable', () => {
         },
         "tgifs": [
           "First sprint done :boom:"
-        ]
+        ],
+        "rank": 1
       }
     ]);
   });
@@ -185,7 +205,8 @@ describe('getTgifLeagueTable', () => {
         "tgifs": [
           "First sprint done :boom:",
           "Second sprint done :boom:"
-        ]
+        ],
+        "rank": 1
       }
     ]);
   });

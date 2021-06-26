@@ -39,9 +39,22 @@ const addNumberMaps = (a, b) => {
  };
 
  const getPerson = (leagueTable, name) => leagueTable.find(p => p.name === name) || { ...BASE_PERSON, name}
- 
+
+const addRanks = (table) => {
+  const ranksForCounts = {};
+  let lastRank = 0;
+  return table
+    .sort((a, b) => b.count - a.count)
+    .map(a => {
+      if(!ranksForCounts[a.count]) {
+        ranksForCounts[a.count] = ++lastRank;
+      }
+      return {...a, rank: ranksForCounts[a.count]}
+    })
+}
+
 const getTgifLeagueTable = (data) => {
-  return data.reduce((acc, row) => {
+  const table = data.reduce((acc, row) => {
     
     const person1 = getPerson(acc, row.person1);
     const person2 = getPerson(acc, row.person2);
@@ -55,7 +68,7 @@ const getTgifLeagueTable = (data) => {
       ...(row.person2.length ? [addRowToPerson(person2, row)] : []),
     ];
  }, []);
-
+  return addRanks(table);
 }
 
 const medalMap = {
@@ -85,5 +98,6 @@ module.exports = {
   addRowToPerson,
   getTgifLeagueTable,
   getFavouriteEmoji,
+  addRanks,
   leagueTableToString
 }
