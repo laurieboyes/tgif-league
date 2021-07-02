@@ -53,8 +53,17 @@ const addRanks = (table) => {
     })
 }
 
+const getFavouriteEmoji = emojiCounts => 
+  Object.entries(emojiCounts)
+    .sort((a,b) => b[1] - a[1])
+    .map(([emoji, count]) => ({ emoji, count}))
+    .filter(({count}) => count > 1)[0];
+
+const addFavouriteEmojis = (table) => table
+    .map(row => ({...row, favouriteEmoji: getFavouriteEmoji(row.emojiCounts)}))
+
 const getTgifLeagueTable = (data) => {
-  const table = data.reduce((acc, row) => {
+  const tableWithCounts = data.reduce((acc, row) => {
     
     const person1 = getPerson(acc, row.person1);
     const person2 = getPerson(acc, row.person2);
@@ -68,7 +77,9 @@ const getTgifLeagueTable = (data) => {
       ...(row.person2.length ? [addRowToPerson(person2, row)] : []),
     ];
  }, []);
-  return addRanks(table);
+  const tableWithRanks = addRanks(tableWithCounts );
+  const tableWithFavouriteEmojis = addFavouriteEmojis(tableWithRanks)
+  return tableWithFavouriteEmojis;
 }
 
 const medalMap = {
@@ -77,17 +88,10 @@ const medalMap = {
   3: ':third_place_medal:'
 }
 
-const getFavouriteEmoji = emojiCounts => 
-  Object.entries(emojiCounts)
-    .sort((a,b) => b[1] - a[1])
-    .map(([emoji, count]) => ({ emoji, count}))
-    .filter(({count}) => count > 1)[0];
-
 const leagueTableToString = leagueTable => leagueTable
     .sort((a, b) => b.count - a.count)
     .map((row, i) => {
-      const favouriteEmoji = getFavouriteEmoji(row.emojiCounts);
-      return `${medalMap[i + 1] || `  ${i + 1} `}    |    ${row.name}    |    ${row.count} tgifs${favouriteEmoji ? `    |    favourite emoji: ${favouriteEmoji.emoji} (${favouriteEmoji.count} uses)` : ''}`;
+      return `${medalMap[i + 1] || `  ${i + 1} `}    |    ${row.name}    |    ${row.count} tgifs${row.favouriteEmoji ? `    |    favourite emoji: ${row.favouriteEmoji.emoji} (${row.favouriteEmoji.count} uses)` : ''}`;
     })
     .join('\n');
  

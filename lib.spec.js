@@ -202,6 +202,10 @@ describe('getTgifLeagueTable', () => {
         "emojiCounts": {
           ":boom:": 2
         },
+        "favouriteEmoji": {
+          "count": 2,
+          "emoji": ":boom:",
+        },
         "tgifs": [
           "First sprint done :boom:",
           "Second sprint done :boom:"
@@ -235,13 +239,21 @@ describe('leagueTableToString', () => {
           ":boom:": 2,
           ":what:": 3,
         },
-        "tgifs": []
+        "tgifs": [],
+        "favouriteEmoji": {
+          "count": 3,
+          "emoji": ":what:",
+        },
       },
       {
         "name": "Freya",
         "count": 3,
         "emojiCounts": {
           ":boom:": 2
+        },
+        "favouriteEmoji": {
+          "count": 2,
+          "emoji": ":boom:",
         },
         "tgifs": []
       },
@@ -258,6 +270,10 @@ describe('leagueTableToString', () => {
         "count": 1,
         "emojiCounts": {
           ":boom:": 2
+        },
+        "favouriteEmoji": {
+          "count": 2,
+          "emoji": ":boom:",
         },
         "tgifs": []
       }
