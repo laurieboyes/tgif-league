@@ -55,8 +55,13 @@ describe('html stuff', () => {
       }
     ];
 
+    const emojis = {
+      ':boom:': 'https://whatever.com/boom.png',
+      ':what:': 'https://whatever.com/what.png'
+    }
+
     // expect no errors
-    const result = leagueTableToHtml(leagueTable);
+    const result = leagueTableToHtml(leagueTable, emojis);
     console.log(result);
     console.log('hello');
   });

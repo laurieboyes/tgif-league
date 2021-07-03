@@ -31,10 +31,10 @@ const leagueTableRowTemplate = ({rank, name, count, favouriteEmoji}) => `
     </tr>
 `;
 
-const leagueTableToHtml = leagueTable => leagueTableTemplate(
+const leagueTableToHtml = (leagueTable, emojis) => leagueTableTemplate(
     leagueTable
         .sort((a, b) => a.rank - b.rank)
-        .map((row, i) => leagueTableRowTemplate(row))
+        .map((row, i) => addEmojiImgTags(leagueTableRowTemplate(row), emojis))
         .join('\n')
     );
 
