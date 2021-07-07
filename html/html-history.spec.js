@@ -4,7 +4,7 @@ describe('tgifsToHtml', () => {
     it('should output all the tgifs in html', () => {
         const data = [
             {
-                "date": "2021-01-29",
+                "date": "2021-01-23",
                 "person1": "Laurie",
                 "person2": "",
                 "tgif": "First sprint done :boom:"

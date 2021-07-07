@@ -10,9 +10,9 @@ const authorsTemplate = (person1, person2) => {
 
 const tgifListItemTemplate = (tgif, emojis, folks) => `
     <li>
-        ${tgif.date} ${authorsTemplate(tgif.person1, tgif.person2)}
+        <p><b>${tgif.date} ${authorsTemplate(tgif.person1, tgif.person2)}</b>
         <br/>
-        ${addEmojiImgTags(tgif.tgif, emojis)}
+        ${addEmojiImgTags(tgif.tgif, emojis)}</p>
     </li>
 `;
 
@@ -40,7 +40,10 @@ const tgifListTemplate = (tgifs, emojis, folks) => `
     </style>
 
     <ul>
-        ${tgifs.map(tgif => tgifListItemTemplate(tgif, emojis, folks)).join('')}
+        ${tgifs
+            .sort((a,b) => b.date.localeCompare(a.date))
+            .map(tgif => tgifListItemTemplate(tgif, emojis, folks)).join('')
+        }
     </ul>    
 `;
 
