@@ -17,25 +17,6 @@ const tgifListItemTemplate = (tgif, emojis, folks) => `
 `;
 
 const tgifListTemplate = (tgifs, emojis, folks) => `
-
-    <style>
-        ul {
-            list-style: none;
-            padding: 0;
-            font-family: sans-serif;
-            font-size: 16px;
-        }
-
-        li {
-            margin-bottom: 0.8em;
-        }
-
-        .emoji {
-            height: 1.3em;
-            vertical-align: text-bottom;
-        }
-    </style>
-
     <ul>
         ${tgifs
             .sort((a,b) => b.date.localeCompare(a.date))

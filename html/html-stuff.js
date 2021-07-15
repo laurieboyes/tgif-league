@@ -1,6 +1,7 @@
 const addEmojiImgTags = require('./add-emoji-img-tags');
+const { tgifsToHtml } = require('./html-history');
 
-const leagueTableTemplate = rows => `
+const styleTag = `
     <style>
         .emoji {
             height: 1.3em;
@@ -46,7 +47,21 @@ const leagueTableTemplate = rows => `
             display: block;
             margin: auto;
         }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            font-family: sans-serif;
+            font-size: 16px;
+        }
+
+        li {
+            margin-bottom: 2em;
+        }
     </style>
+`;
+
+const leagueTableTemplate = rows => `
     <table>
         <tr>
             <th>Rank</th>
@@ -79,6 +94,9 @@ const leagueTableToHtml = (leagueTable, emojis, folks) => leagueTableTemplate(
         .join('\n')
     );
 
+const theWholePage = (tgifs, leagueTable, emojis, folks) => styleTag + leagueTableToHtml(leagueTable, emojis, folks) +'<br/>' + tgifsToHtml(tgifs, emojis, folks)
+
 module.exports = {
-    leagueTableToHtml
+    leagueTableToHtml,
+    theWholePage
 };
