@@ -19,14 +19,11 @@ const tgifListItemTemplate = (tgif, emojis, folks) => `
 const tgifListTemplate = (tgifs, emojis, folks) => `
 
     <style>
-        body {
-            font-family: sans-serif;
-            font-size: 16px;
-        }
-
         ul {
             list-style: none;
             padding: 0;
+            font-family: sans-serif;
+            font-size: 16px;
         }
 
         li {

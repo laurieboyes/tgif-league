@@ -6,7 +6,7 @@ describe('addEmojiImgTags', () => {
       const emojis = {
         ':haha:': 'haha.png'
       }
-      expect(addEmojiImgTags(string, emojis)).toEqual('lol <img class="emoji" src="haha.png"/> lol') 
+      expect(addEmojiImgTags(string, emojis)).toEqual('lol <img class="emoji" src="haha.png" alt=":haha:"/> lol') 
     });
 
     it('should swap in multiple emojis', () => {
@@ -15,7 +15,7 @@ describe('addEmojiImgTags', () => {
         ':haha:': 'haha.png',
         ':cool:': 'cool.png'
       };
-      expect(addEmojiImgTags(string, emojis)).toEqual('lol <img class="emoji" src="haha.png"/> um <img class="emoji" src="cool.png"/> lol') 
+      expect(addEmojiImgTags(string, emojis)).toEqual('lol <img class="emoji" src="haha.png" alt=":haha:"/> um <img class="emoji" src="cool.png" alt=":cool:"/> lol') 
     });
 
     it('shouldn’t intepret two urls as an emoji', () => {
