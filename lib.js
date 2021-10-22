@@ -67,14 +67,16 @@ const getTgifLeagueTable = (data) => {
     
     const person1 = getPerson(acc, row.person1);
     const person2 = getPerson(acc, row.person2);
+    const person3 = getPerson(acc, row.person3);
     
-    const others = acc.filter(p => ![person1, person2].includes(p));
+    const others = acc.filter(p => ![person1, person2, person3].includes(p));
 
 
     return [
       ...others,
       ...(row.person1.length ? [addRowToPerson(person1, row)] : []),
-      ...(row.person2.length ? [addRowToPerson(person2, row)] : []),
+      ...(row.person2?.length ? [addRowToPerson(person2, row)] : []),
+      ...(row.person3?.length ? [addRowToPerson(person3, row)] : []),
     ];
  }, []);
   const tableWithRanks = addRanks(tableWithCounts );

@@ -1,7 +1,10 @@
 const addEmojiImgTags = require('./add-emoji-img-tags');
 
-const authorsTemplate = (person1, person2) => {
-    if(person2) {
+const authorsTemplate = (person1, person2, person3) => {
+    if(person3) {
+        return `${person1} + ${person2} + ${person3}`
+    }
+    else if(person2) {
         return `${person1} + ${person2}`
     } else {
         return person1;
@@ -10,7 +13,7 @@ const authorsTemplate = (person1, person2) => {
 
 const tgifListItemTemplate = (tgif, emojis, folks) => `
     <li>
-        <p><b>${tgif.date} ${authorsTemplate(tgif.person1, tgif.person2)}</b>
+        <p><b>${tgif.date} ${authorsTemplate(tgif.person1, tgif.person2, tgif.person3)}</b>
         <br/>
         ${addEmojiImgTags(tgif.tgif, emojis)}</p>
     </li>
